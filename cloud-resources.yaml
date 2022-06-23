@@ -2,7 +2,7 @@ Resources:
   TODOAppBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: cloud-native-todo-app-2022
+      BucketName: !Ref BucketName
       PublicAccessBlockConfiguration:
         BlockPublicAcls: false
         BlockPublicPolicy: false
@@ -23,3 +23,11 @@ Resources:
             Effect: Allow
             Resource:
               - !Sub 'arn:aws:s3:::${TODOAppBucket}/*'
+
+Parameters:
+  BucketName:
+    Type: String
+    Default: 'cloud-native-todo-app-2022' # Note that the name must be unique across all accounts
+    MinLength: 3
+    MaxLength: 63
+    Description: Enter the bucket name for hosting the TODO app.
